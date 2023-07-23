@@ -1,4 +1,7 @@
-
+<script>
+	export let auth
+	console.log(auth)
+</script>
 <style>
 	#login {
 		border:1px solid black;
