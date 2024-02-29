@@ -13,9 +13,9 @@ const generateRandomString = (length) => {
 };
 //fetch('/api/posts')
 export const GET = async () => {
-	const scope = "streaming user-read-email user-read-private";
+	const scope = "streaming user-read-email user-read-private playlist-read-private playlist-read-collaborative";
 	const state = generateRandomString(16);
-	console.log()
+	console.log("redirect")
 	const auth_query_parameters = new URLSearchParams({
 	  response_type: "code",
 	  client_id: SPOTIFY_CLIENT_ID,

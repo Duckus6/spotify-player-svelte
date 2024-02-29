@@ -19,17 +19,13 @@ export const GET = async ({ request, url, cookies }) => {
 			})
 
 	}
-	// console.log(authOptions)
-	console.log(code,state)
-	console.log(request.url)
+	// console.log(code,state)
+	// console.log(request.url)
 	const resp = await fetch(`https://accounts.spotify.com/api/token?`,authOptions)
 		.then(response => response.json())
-	console.log(JSON.stringify(resp))
 	const access_token = resp.access_token,
 	refresh_token = resp.refresh_token;
-	const options = {
-		headers: new URLSearchParams({"Authorization": `Bearer ${access_token}`})
-	}
+	
 	if (!resp.access_token) {
 		throw error(404, {
 			message: `INVALID TOKEN`
@@ -42,8 +38,7 @@ export const GET = async ({ request, url, cookies }) => {
 		maxAge:resp.expires_in,
 	})
 	console.log("woooo")
-	console.log(cookies.get("AuthorizationToken"))
-	throw redirect(302,"/")
+	throw redirect(301,'/')
 	///https://dev.to/theether0/sveltekit-changes-session-and-cookies-enb
 	///https://github.com/joysofcode/sveltekit-auth-cookies/blob/main/src/routes/%2Blayout.server.ts
 
