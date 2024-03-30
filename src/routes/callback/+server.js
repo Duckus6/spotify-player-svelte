@@ -19,8 +19,6 @@ export const GET = async ({ request, url, cookies }) => {
 			})
 
 	}
-	// console.log(code,state)
-	// console.log(request.url)
 	const resp = await fetch(`https://accounts.spotify.com/api/token?`,authOptions)
 		.then(response => response.json())
 	const access_token = resp.access_token,

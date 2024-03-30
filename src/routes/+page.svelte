@@ -13,11 +13,11 @@
 	<!--MAYBE MAKE AN ACTION https://kit.svelte.dev/docs/form-actions-->
 	<button id="login" on:click={login}>Click me to login</button>
 {:else}
-	<div id="playlist-container">
+	<ul id="playlist-container">
 		{#each playlists as playlist}
 			<SpotifyPlaylist {playlist} />
 		{/each}
-	</div>
+	</ul>
 {/if}
 <slot />
 
@@ -28,6 +28,10 @@
 		color: white;
 	}
 	#playlist-container {
+		display:flex;
 		max-width: 30%;
+		height:70vh;
+		flex-direction: column;
+		flex-wrap: wrap;
 	}
 </style>

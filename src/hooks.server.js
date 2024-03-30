@@ -9,9 +9,9 @@ const getPlaylists = async (token, id) => {
 }
 export const handle = async ({ event, resolve }) => {
 	const AuthorizationToken = event.cookies.get('AuthorizationToken')
-	// console.log(event.cookies.getAll())
+	
 	if (!AuthorizationToken) {
-		// console.log(event.cookies.getAll(), 1212)
+	
 		return await resolve(event)
 	}
 

@@ -2,33 +2,44 @@
 	customElement={{
 		tag: "spotify-playlist",
 	}}
+	
 />
 
 <script>
+    import { page } from "$app/stores";
+
 	export let playlist;
-	// console.log(playlist);
+	const getTracks = async () => {
+		//get token from cookie
+		//token undefined WIP
+		const tracks = await fetch(`/getTracks?uid=${$page.data.user.id}` + new URLSearchParams({
+			uid:$page.data.user.id,
+			pid:playlist.id,
+			token:$page.data.auth,
+		}).toString())
+		console.log(tracks)
+	}
 </script>
 
-<div class="playlist">
+<li class="playlist">
 	<img src={playlist.images[0].url} alt="playlist {playlist.name} image" />
 	<div>
 		<h3>{playlist.name}</h3>
 		<!-- <span>{playlist.description}</span> -->
 	</div>
-	<button>
+	<button on:click={getTracks}>
 		<svg
 			data-encore-id="icon"
 			role="img"
 			aria-hidden="true"
 			viewBox="0 0 16 16"
-			class="kPpCsU"
 		>
 			<path
 				d="M3 1.713a.7.7 0 0 1 1.05-.607l10.89 6.288a.7.7 0 0 1 0 1.212L4.05 14.894A.7.7 0 0 1 3 14.288V1.713z"
 			></path></svg
 		>
 	</button>
-</div>
+</li>
 <!-- <iframe
 	style="border-radius:12px"
 	src="https://open.spotify.com/embed/playlist/0bIDkAxEInjdT5BAtIDHlT?utm_source=generator"
@@ -49,6 +60,7 @@
 		border-radius: 6px;
 		padding: 8px;
 		border: 1px solid black;
+		margin: 0.5vh;
 	}
 	.playlist img {
 		position: absolute;
