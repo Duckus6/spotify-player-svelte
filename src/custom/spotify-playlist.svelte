@@ -15,7 +15,7 @@
 		const tracks = await fetch(`/getTracks?uid=${$page.data.user.id}` + new URLSearchParams({
 			uid:$page.data.user.id,
 			pid:playlist.id,
-			token:$page.data.auth,
+			auth:$page.data.auth,
 		}).toString())
 		console.log(tracks)
 	}

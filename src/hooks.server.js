@@ -21,7 +21,7 @@ export const handle = async ({ event, resolve }) => {
 
 	if (event.locals.auth) {
 		const user = await getUser(event.locals.auth)
-		console.log(user, 132)
+		// console.log(user, 132)
 		event.locals.user = user
 	} if (event.locals.user) {
 		const playlists = await getPlaylists(event.locals.auth, event.locals.user.id)
