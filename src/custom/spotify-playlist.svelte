@@ -2,23 +2,29 @@
 	customElement={{
 		tag: "spotify-playlist",
 	}}
-	
 />
 
 <script>
-    import { page } from "$app/stores";
+	import { page } from "$app/stores";
 
 	export let playlist;
 	const getTracks = async () => {
-		//get token from cookie
-		//token undefined WIP
-		const tracks = await fetch(`/getTracks?uid=${$page.data.user.id}` + new URLSearchParams({
-			uid:$page.data.user.id,
-			pid:playlist.id,
-			auth:$page.data.auth,
-		}).toString())
-		console.log(tracks)
-	}
+		//got track time to play it
+		//also need to do randomise now
+		//clean up the get tracks at some point
+		const tracks = await fetch(
+			`/getTracks?uid=${$page.data.user.id}` +
+				new URLSearchParams({
+					uid: $page.data.user.id,
+					pid: playlist.id,
+					auth: $page.data.auth,
+					offset:playlist.tracks.total -1,
+					limit:1,
+
+				}).toString(),
+		).then(resp => resp.json());
+		console.log(tracks);
+	};
 </script>
 
 <li class="playlist">
@@ -36,8 +42,8 @@
 		>
 			<path
 				d="M3 1.713a.7.7 0 0 1 1.05-.607l10.89 6.288a.7.7 0 0 1 0 1.212L4.05 14.894A.7.7 0 0 1 3 14.288V1.713z"
-			></path></svg
-		>
+			></path>
+		</svg>
 	</button>
 </li>
 <!-- <iframe

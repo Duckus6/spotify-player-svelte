@@ -1,11 +1,13 @@
+import { json } from '@sveltejs/kit'
+
 export const GET = async ({url}) => {
 	console.log("get tracks")
 	const params = paramsToObject(url.searchParams.entries())
 	console.log(params)
-	const {auth,uid,pid} = params
+	const {auth,uid,pid,offset=0,limit=10} = params
 	console.log("get tracks")
 	// console.log({token,uid,pid})
-	const resp = await fetch(`https://api.spotify.com/v1/users/${uid}/playlists/${pid}/tracks?offset=${0}&limit=10`, {
+	const resp = await fetch(`https://api.spotify.com/v1/users/${uid}/playlists/${pid}/tracks?offset=${offset}&limit=${limit}`, {
 		method:"GET",
 		headers:  {
 			"Authorization": `Bearer ${auth}`
@@ -15,10 +17,12 @@ export const GET = async ({url}) => {
 	
 	console.log(resp)
 	//maybe a generic "get next"?
-	const {limit,total,offset} = resp
+	// const {limit,total,offset} = resp
 
-	const newOffset = (limit+offset)
+	// const newOffset = (limit+offset)
 	let {items} = resp
+
+
 	//not implementing untiul some sort of cache shit
 	if (false) {
 	// if ((total-newOffset) >0) {
@@ -28,7 +32,7 @@ export const GET = async ({url}) => {
 		items = items.concat(newItems)
 	// } else {
 	}
-	return items
+	return Response.json({items})
 }
 //move somewhere
 function paramsToObject(entries) {
